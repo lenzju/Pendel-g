@@ -4,10 +4,10 @@ import numpy as np
 import cv2
 
 # Modell laden
-model = load_model("models/keras_model.h5", compile=False)
+model = load_model("model/keras_model.h5", compile=False)
 
 # Labels laden
-class_names = open("models/labels.txt", "r").readlines()
+class_names = open("model/labels.txt", "r").readlines()
 
 
 def classify_video(video_path):
