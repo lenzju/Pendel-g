@@ -1,4 +1,4 @@
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from PIL import Image, ImageOps
 import numpy as np
 import cv2
@@ -22,7 +22,7 @@ def classify_video(video_path):
         if not ret:
             break
 
-        # OpenCV BGR -> RGB
+        # OpenCV (BGR) -> RGB
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         image = Image.fromarray(frame_rgb)
@@ -32,7 +32,7 @@ def classify_video(video_path):
 
         image_array = np.asarray(image)
 
-        # WICHTIG: Teachable Machine Normalisierung
+        # Teachable Machine Normalisierung
         normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
 
         data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
@@ -43,6 +43,7 @@ def classify_video(video_path):
         index = np.argmax(prediction)
         confidence = prediction[0][index]
 
+        # Nur sichere Vorhersagen
         if confidence > 0.8:
             label = class_names[index].strip()
             states.append((frame_idx, label))
