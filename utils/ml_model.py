@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 
 # Modell laden
-model = load_model("models/keras_Model.h5", compile=False)
+model = load_model("models/keras_model.h5", compile=False)
 
 # Labels laden
 class_names = open("models/labels.txt", "r").readlines()
